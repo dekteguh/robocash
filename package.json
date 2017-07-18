@@ -1,0 +1,19 @@
+{
+  "name": "robocash",
+  "version": "1.0.0",
+  "description": "simple shop for robotics equipments",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Eko Teguh Widodo",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "hbs": "^4.0.1",
+    "path": "^0.12.7"
+  }
+}
