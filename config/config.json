@@ -1,0 +1,14 @@
+{
+  "development": {
+    "storage": "./data/robocash_dev.db",
+    "dialect": "sqlite"
+  },
+  "test": {
+    "storage": "./data/robocash_test.db",
+    "dialect": "sqlite"
+  },
+  "production": {
+    "storage": "./data/robocash.db",
+    "dialect": "sqlite"
+  }
+}
