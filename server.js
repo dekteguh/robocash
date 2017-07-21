@@ -1,10 +1,14 @@
 const express = require('express')
 const path = require('path')
+const bodyParser = require('body-parser')
 const port = 3000
 
-const items = require('./models/items')
+// const items = require('./models/Items.json') // not using again
+const sequelize = require('./models').sequelize // goto index.js in models folder
 
 const app = express()
+
+const index = require('./routes/index')
 
 // setting views
 app.set('views', path.join(__dirname, 'views'))
@@ -13,28 +17,20 @@ app.set('view engine', 'hbs')
 // setting static file
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.get('/', (req, res) => {
-    res.render("index", { items: items });
-})
+app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: true
+}));
 
-app.get('/detail/:id', (req, res) => {
-    const item = items.find(data => {
-        return data.id == req.params.id
+app.use('/', index)
+
+// sync with Promise then() if success and catch if error
+sequelize.sync()
+    .then(() => {
+         app.listen(port, () => {
+            console.log(`Server listen to http://127.0.0.1:${port}/`)
+         })
     })
-    
-    res.render('detail', {
-        item: item
+    .catch(err => {
+        console.log("Something went wrong with sync. Error: " + err.message)
     })
-})
-
-app.get('/about', (req, res) => {
-    res.render('about')
-})
-
-app.get('/contact', (req, res) => {
-    res.render('contact')
-})
-
-app.listen(port, () => {
-    console.log(`Server listen to http://127.0.0.1:${port}/`)
-})
