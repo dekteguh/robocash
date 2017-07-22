@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>RoboCASH - Everything about Robotics</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#robocash-navbar-collapse" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">RoboCASH</a>
+                </div>
+                <div class="collapse navbar-collapse" id="robocash-navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/about">About</a></li>
+                        <li><a href="/contact">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <h3>Edit Item</h3>
+                <ol class="breadcrumb bg-white">
+                    <li><a href="/">Home</a></li>
+                    <li class="active">Item</li>
+                </ol>
+
+                <div class="col-md-10 col-sm-8 col-xs-7">
+                    <form action="/update" method="post" class="form-horizontal">
+                        <fieldset>
+                            <legend>Item's Form</legend>
+                            <div class="form-group">
+                                <label for="title" class="col-sm-2 control-label">Title</label>
+                                <div class="col-sm-4">
+                                    <input type="hidden" name="id" value="{{ item.id }}">
+                                    <input type="text" class="form-control" name="title" id="title" placeholder="Please input title of the item" value="{{ item.title }}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="description" class="col-sm-2 control-label">Description</label>
+                                <div class="col-sm-6">
+                                    <textarea type="text" class="form-control" name="description" id="description" placeholder="Please input description of the item" cols="60" rows="10">{{ item.description }}</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="price" class="col-sm-2 control-label">Price</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="price" id="price" placeholder="Please input price of the item" value="{{ item.price }}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="image" class="col-sm-2 control-label">Link Image</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="image" id="image" placeholder="Please input link of image of the item" value="{{ item.image }}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2 col-sm-offset-2">
+                                    <button class="btn btn-primary" type="submit">Update</button>
+                                </div>
+                            </div>
+
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <hr />
+            <p class="text-muted text-center">2017 &copy; RoboCASH - Everything about Robotics</p>
+        </div>
+    </div>
+</body>
+
+</html>
