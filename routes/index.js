@@ -11,6 +11,9 @@ router.get('/create', (req,res) => {
 })
 
 router.post('/create', controller.create)
+router.get('/get/:id', controller.edit)
+router.post('/update', controller.update)
+router.get('/delete/:id', controller.delete)
 
 router.get('/about', (req, res) => {
     res.render('about')

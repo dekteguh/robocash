@@ -25,23 +25,25 @@ const read = (req,res) => {
   })
 }
 
+function formatNumber (num) {
+    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+}
+
 const get = (req,res) => {
   Item.findOne({where: {id: parseInt(req.params.id)}}).then(item => {
-    let type = true
+    let type = false
 
-    /*
-    if(Array.isArray(JSON.parse(item.description))){
-      item.description = JSON.parse(item.description)
+    if(item.description.includes('\r\n')){
+      let desc = []
+      item.description.split('\r\n').map(line => {
+        desc.push(line)
+      })
+
+      item.description = desc
       type = true
     }
-    */
 
-    let desc = []
-    item.description.split('\r\n').map(line => {
-      desc.push(line)
-    })
-
-    item.description = desc
+    item.price = formatNumber(item.price)
 
     res.render('detail',{
       statusCode: 200,
@@ -57,17 +59,33 @@ const get = (req,res) => {
   })
 }
 
+const edit = (req,res) => {
+  Item.findOne({where: {id: parseInt(req.params.id)}}).then(item => {
+
+    res.render('edit',{
+      statusCode: 200,
+      item: item
+    })
+  }).catch(err => {
+    console.log(err.message)
+    res.render('detail',{
+      statusCode: 500,
+      item: null
+    })
+  })
+}
+
 const update = (req,res) => {
   Item.update({
     title: req.body.title,
     image: req.body.image,
-    price: parseDouble(req.body.price),
+    price: parseFloat(req.body.price),
     description: req.body.description,
     createdAt: new Date(),
     updatedAt: new Date()
   },{
     where: {
-      id: req.params.id
+      id: parseInt(req.body.id)
     }
   }).then(() => {
     console.log('Success update!')
@@ -78,7 +96,7 @@ const update = (req,res) => {
 const remove = (req,res) => {
   Item.destroy({
     where: {
-      id: req.params.id
+      id: parseInt(req.params.id)
     }
   }).then(() => {
     console.log('Success delete!')
@@ -91,5 +109,6 @@ module.exports = {
   read: read,
   update: update,
   delete: remove,
-  get: get
+  get: get,
+  edit: edit
 }
