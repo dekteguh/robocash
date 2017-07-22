@@ -13,4 +13,5 @@ Simple web app using nodejs, express for robotics products.
 - [x] Create db dan model using Sequelize
 - [x] Create seeder using Sequelize
 - [x] Create controller
+- [x] Implement Edit Update and Delete
 - [ ] and ...
